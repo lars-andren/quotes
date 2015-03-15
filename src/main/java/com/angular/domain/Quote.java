@@ -1,18 +1,17 @@
 package com.angular.domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by Lars on 2015-03-15.
  */
+@XmlRootElement
 public class Quote {
 
     private String quote;
     private String name;
 
-    public Quote(String name, String quote) {
-
-        this.name = name;
-        this.quote = quote;
-    }
+    public Quote() {}
 
     public String getName() {
         return name;

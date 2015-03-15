@@ -21,15 +21,18 @@ public class QuoteService {
      */
     @GET
     @Path("/test")
-    public Response getQuoteTest() {
+    public Quote getQuoteTest() {
         Gson gson = new Gson();
         //String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
 
-        String output = gson.toJson(new Quote("NAME", "QUOTE"));
+       // String output = gson.toJson(new Quote("NAME", "QUOTE"));
 
         System.out.println("_____REACHED QUOTE SERVICE");
 
-        return Response.status(200).entity(output).build();
+        Quote quote = new Quote();
+        quote.setName("Frank Underwoord");
+        quote.setQuote("Go fuck yourslf");
+        return quote;
     }
 
     /**
@@ -41,7 +44,7 @@ public class QuoteService {
         Gson gson = new Gson();
         //String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
 
-        String output = gson.toJson(new Quote("NAME", "QUOTE"));
+        String output = gson.toJson(new Quote());
 
         System.out.println("_____REACHED qUOTE SERVICE");
 

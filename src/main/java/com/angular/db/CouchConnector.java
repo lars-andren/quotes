@@ -1,5 +1,6 @@
 package com.angular.db;
 
+import com.angular.domain.Quote;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.CouchbaseCluster;
@@ -42,25 +43,24 @@ public class CouchConnector {
      * Simple synchronous addition of an entry to the database. If there is an entry with tha same name (i.e. ID),
      * this entry will be updated with the quote given as parameter.
      *
-     * @param name  the name of the person.
      * @param quote what the person said.
      *
      * @return <code>true</code> if the insertion/update was successful.
      *         <code>false</code> if something went wrong.
      */
-    public boolean addDocumentSynch(String name, String quote) {
+    public boolean addQuoteSynch(Quote quote) {
 
-        JsonDocument loaded = getItem(name);
+        JsonDocument loaded = getItem(quote.getName());
 
         if (loaded == null) {
             try {
-                bucket.upsert(createJsonDocument(name, quote));
+                bucket.upsert(createJsonDocument(quote));
             } catch (DocumentAlreadyExistsException e) {
                 return false;
             }
         }
         else {
-            loaded.content().put(name, quote);
+            loaded.content().put(quote.getName(), quote.getQuote());
             bucket.replace(loaded);
         }
 
@@ -109,17 +109,16 @@ public class CouchConnector {
     /**
      * Helper method that creates a JsonDocument containing a JsonObject with a "name" and "quote".
      *
-     * @param name  name of the person, also the ID of the JsonDocument.
      * @param quote what the person said.
      * @return  a JsonDocument with the <code>name</code> as ID.
      */
-    private JsonDocument createJsonDocument(String name, String quote) {
+    private JsonDocument createJsonDocument(Quote quote) {
 
-        JsonObject person = JsonObject.empty()
-                .put("name", name)
-                .put("quote", quote);
+        JsonObject jsonQuote = JsonObject.empty()
+                .put("name", quote.getName())
+                .put("quote", quote.getQuote());
 
-        JsonDocument document = JsonDocument.create(name, person);
+        JsonDocument document = JsonDocument.create(quote.getName(), jsonQuote);
 
         return document;
     }

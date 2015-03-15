@@ -37,7 +37,7 @@ public class EmployeeService {
         Gson gson = new Gson();
         String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
 
-        output = gson.toJson((new Quote(1, "ello", "luv")));
+     //   output = gson.toJson((new Quote(1, "ello", "luv")));
 
         System.out.println("_____REACHED SERVICE");
 
