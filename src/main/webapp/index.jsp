@@ -5,10 +5,13 @@
 <html ng-app="angularapp">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="angular.js"></script>
-        <script src="angular-resource.js"></script>
+
+        <script src="lib/angular.js"></script>
+        <script src="lib/angular-resource.js"></script>
         <script src="controller.js"></script>
-        <title>Angular Application</title>
+
+        <title>Quotes - An Angular Application</title>
+
         <style>
             body {
                 font-family: verdana, sans-serif;
