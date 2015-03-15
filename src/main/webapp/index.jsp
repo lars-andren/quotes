@@ -8,7 +8,7 @@
 
         <script src="lib/angular.js"></script>
         <script src="lib/angular-resource.js"></script>
-        <script src="controller.js"></script>
+        <script src="js/controller.js"></script>
 
         <title>Quotes - An Angular Application</title>
 

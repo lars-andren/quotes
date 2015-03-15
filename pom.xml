@@ -11,6 +11,8 @@
     <url>http://maven.apache.org</url>
 
     <dependencies>
+
+        <!-- RESTful Web Service Jersey -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -28,11 +30,21 @@
             <artifactId>jersey-server</artifactId>
             <version>1.8</version>
         </dependency>
+
+        <!-- GSON parsing -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.2.4</version>
         </dependency>
+
+        <!-- Couchbase DB -->
+        <dependency>
+            <groupId>com.couchbase.client</groupId>
+            <artifactId>java-client</artifactId>
+            <version>2.0.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>

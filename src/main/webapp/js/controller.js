@@ -34,12 +34,13 @@ angularModule.factory("EmployeeReporteeService", ['$resource', function($resourc
  */
 angularModule.controller("EmployeeController", function($scope, $http, EmployeeListService, EmployeeReporteeService) {
 
+    /*
     // Default employe Object
     $scope.employee = {name: "Martin"};
     
-    // Initial reportees which will be filled by RESTful call.
+    // Initial reportees which will be filled by RESTful call.*/
     $scope.reportees = [];
-
+/*
     // Call to servlet to fetch the employee details
     $scope.fetchGet = function() {
         $http.get("empMgr", 
@@ -63,18 +64,18 @@ angularModule.controller("EmployeeController", function($scope, $http, EmployeeL
         var dataToPost = {firstName: "Allen", lastName: "John"}; /* PostData*/
         
         // Configuring the query parameters.
-        var queryParams = {params: {op: 'saveEmployee'}};/* Query Parameters*/
-        
+    //    var queryParams = {params: {op: 'saveEmployee'}};/* Query Parameters*/
+
         // Posting the data to the Servlet.
-        $http.post("empMgr" /* URL */, dataToPost, queryParams) 
-            .success(function(serverResponse, status, headers, config) {
+ //       $http.post("empMgr" /* URL */, dataToPost, queryParams)
+   //         .success(function(serverResponse, status, headers, config) {
                 // Updating the $scope postresponse variable to update theview
-                $scope.postresponse = serverResponse.data.firstName + " " + serverResponse.data.lastName;
-            }).error(function(serverResponse, status, headers, config) {
-                alert("failure");
-            }
-        );
-    };
+     //           $scope.postresponse = serverResponse.data.firstName + " " + serverResponse.data.lastName;
+       //     }).error(function(serverResponse, status, headers, config) {
+         //       alert("failure");
+           // }
+        //);
+//    };
 
     // Calling the RESTful service to fethch the employee details. 
     $scope.restGet = function() {
