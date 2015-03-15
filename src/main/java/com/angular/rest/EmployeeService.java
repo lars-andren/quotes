@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import com.angular.domain.Employee;
+import com.angular.domain.Quote;
 import com.google.gson.Gson;
 import javax.ws.rs.QueryParam;
 
@@ -30,10 +31,15 @@ public class EmployeeService {
      * Returns employee Details.
      */
     @GET
-    @Path("/{param}")
-    public Response getEmployeeById(@PathParam("param") String employeeID) {
+    //@Path("/{param}")
+    //public Response getEmployeeById(@PathParam("param") String employeeID) {
+    public Response getEmployeeById() {
         Gson gson = new Gson();
         String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
+
+        output = gson.toJson((new Quote(1, "ello", "luv")));
+
+        System.out.println("_____REACHED SERVICE");
 
         return Response.status(200).entity(output).build();
     }

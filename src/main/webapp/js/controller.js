@@ -2,13 +2,24 @@
 // Defining the Angular Module and injecting the ngResource
 var angularModule = angular.module("angularapp", ["ngResource"]);
 
+
 // Service to fetch EmployeeListService
 angularModule.factory("EmployeeListService", ['$resource', function($resource){
       return $resource('rest/employee/:empId',
                 {empId: '@id'},
                 {contactNumbers: {method: 'GET', params: {admin: true}, isArray: false}});  
-}]) ;
+}]);
 
+
+// Service to fetch QuoteListService
+angularModule.factory("QuoteListService", ['$resource', function($resource) {
+    return $resource('rest/quote/test',
+        {method: 'GET',
+            params: {admin: true},
+            isArray: false
+        }
+    )
+}]);
 
 // Service to fetch Reportees
 angularModule.factory("EmployeeReporteeService", ['$resource', function($resource){
@@ -32,7 +43,7 @@ angularModule.factory("EmployeeReporteeService", ['$resource', function($resourc
  * @param {type} param1
  * @param {type} param2
  */
-angularModule.controller("EmployeeController", function($scope, $http, EmployeeListService, EmployeeReporteeService) {
+angularModule.controller("EmployeeController", function($scope, $http, QuoteListService, EmployeeListService, EmployeeReporteeService) {
 
     /*
     // Default employe Object
@@ -79,7 +90,11 @@ angularModule.controller("EmployeeController", function($scope, $http, EmployeeL
 
     // Calling the RESTful service to fethch the employee details. 
     $scope.restGet = function() {
-        $scope.employeeDetails = EmployeeListService.get({empId: 10});
+        $scope.quote = QuoteListService.get();
+
+        //$scope.employeeDetails = EmployeeListService.get({empId: 10});
+
+
     };
     
     // Calling the RESTful service to query the details of Employee id 10
