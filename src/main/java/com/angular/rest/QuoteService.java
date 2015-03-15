@@ -25,7 +25,7 @@ public class QuoteService {
         Gson gson = new Gson();
         //String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
 
-        String output = gson.toJson(new Quote(1, "NAME", "QUOTE"));
+        String output = gson.toJson(new Quote("NAME", "QUOTE"));
 
         System.out.println("_____REACHED QUOTE SERVICE");
 
@@ -41,7 +41,7 @@ public class QuoteService {
         Gson gson = new Gson();
         //String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
 
-        String output = gson.toJson(new Quote(1, "NAME", "QUOTE"));
+        String output = gson.toJson(new Quote("NAME", "QUOTE"));
 
         System.out.println("_____REACHED qUOTE SERVICE");
 
