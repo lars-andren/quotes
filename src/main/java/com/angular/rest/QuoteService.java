@@ -6,6 +6,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+
+import com.angular.db.CouchConnector;
+import com.angular.domain.Employee;
 import com.angular.domain.Quote;
 import com.google.gson.Gson;
 import javax.ws.rs.QueryParam;
@@ -33,6 +36,27 @@ public class QuoteService {
         quote.setName("Frank Underwoord");
         quote.setQuote("Go fuck yourslf");
         return quote;
+    }
+
+    @GET
+    @Path("/all")
+    public Response getAllQuotes() {
+
+        List<Quote> results = CouchConnector.getInstance().getAllItems();
+        Gson gson = new Gson();
+
+      /*  String output = "";
+        for (int i=0; i < results.size(); i++) {
+            output = output + gson.toJson(results.get(i));
+        }*/
+        //String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
+        String output = gson.toJson(results);
+
+        System.out.println("QuoteSerivce, allquotes: " + output);
+
+        return Response.status(200).entity(output).build();
+        // String output = gson.toJson(new Quote("NAME", "QUOTE"));
+
     }
 
     /**

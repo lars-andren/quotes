@@ -13,10 +13,10 @@ angularModule.factory("EmployeeListService", ['$resource', function($resource){
 
 // Service to fetch QuoteListService
 angularModule.factory("QuoteListService", ['$resource', function($resource) {
-    return $resource('rest/quote/test',
+    return $resource('rest/quote/all',
         {method: 'GET',
             params: {admin: true},
-            isArray: false
+            isArray: true
         }
     )
 }]);
@@ -51,6 +51,9 @@ angularModule.controller("EmployeeController", function($scope, $http, QuoteList
     
     // Initial reportees which will be filled by RESTful call.*/
     $scope.reportees = [];
+
+    $scope.quotes = [];
+    $scope.said = " once said ";
 /*
     // Call to servlet to fetch the employee details
     $scope.fetchGet = function() {
@@ -90,11 +93,12 @@ angularModule.controller("EmployeeController", function($scope, $http, QuoteList
 
     // Calling the RESTful service to fethch the employee details. 
     $scope.restGet = function() {
-        $scope.quote = QuoteListService.get();
-
-        //$scope.employeeDetails = EmployeeListService.get({empId: 10});
-
-
+        QuoteListService.query(function(data) {
+            for(var i=0; i<data.length; i++) {
+                $scope.quotes[i] = data[i];
+            }
+        });
+        //$scope.employeeDetails = EmployeeListService.get({empId: 10})
     };
     
     // Calling the RESTful service to query the details of Employee id 10

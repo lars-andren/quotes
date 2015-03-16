@@ -71,9 +71,9 @@ public class CouchConnector {
      *
      * @return
      */
-    public List<String> getAllItems() {
+    public List<Quote> getAllItems() {
 
-        List<String> allQuotes = new ArrayList<String>();
+        List<Quote> allQuotes = new ArrayList<Quote>();
 
         ViewResult result = bucket.query(
                 ViewQuery
@@ -81,7 +81,10 @@ public class CouchConnector {
         );
 
         for(ViewRow row : result.allRows()){
-            allQuotes.add(row.toString());
+            Quote quote = new Quote();
+            quote.setName(row.key().toString());
+            quote.setQuote(row.value().toString());
+            allQuotes.add(quote);
         }
 
         return allQuotes;

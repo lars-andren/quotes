@@ -53,6 +53,9 @@ public class EmployeeService {
     public Response findReportees(@PathParam("param") String empID, @QueryParam("admin") boolean admin) {
         Gson gson = new Gson();
         String output = gson.toJson(reporteesList);
+
+        System.out.println("EmployeeService, reportees: " + output);
+
         System.out.println(" id == " + admin);
         if (!admin) {
          return Response.status(200).entity(output).build();

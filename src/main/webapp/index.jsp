@@ -28,8 +28,11 @@
         <fieldset>
             <legend><strong>RESTful Service</strong></legend>
             <h3>Fetch Employee Details: {{employeeDetails.id}} , {{employeeDetails.firstName}} {{employeeDetails.lastName}}</h3>
-            <h2>Quote: {{quote.name}} , {{quote.quote}}</h2>
-            <h2>Quote: {{quote}}</h2>
+            <h2>Quotes:</h2>
+            <ul ng-repeat="quote in quotes">
+                <li>{{quote.name + said}} "{{quote.quote}}"</li>
+            </ul>
+
             <input type="button" ng-click="restGet()" value="Fetch Rest call"/>
             <h3>Fetch Reportee Details:</h3>
             <ul ng-repeat="reportee in reportees">
