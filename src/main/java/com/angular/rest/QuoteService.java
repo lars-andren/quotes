@@ -1,17 +1,12 @@
 package com.angular.rest;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 import com.angular.db.CouchConnector;
-import com.angular.domain.Employee;
 import com.angular.domain.Quote;
 import com.google.gson.Gson;
-import javax.ws.rs.QueryParam;
 
 /**
  * Created by Lars on 2015-03-15.
@@ -19,60 +14,40 @@ import javax.ws.rs.QueryParam;
 @Path("/quote")
 public class QuoteService {
 
-    /**
-     * Returns employee Details.
-     */
     @GET
-    @Path("/test")
-    public Quote getQuoteTest() {
-        Gson gson = new Gson();
-        //String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
-
-       // String output = gson.toJson(new Quote("NAME", "QUOTE"));
-
-        System.out.println("_____REACHED QUOTE SERVICE");
-
-        Quote quote = new Quote();
-        quote.setName("Frank Underwoord");
-        quote.setQuote("Go fuck yourslf");
-        return quote;
-    }
-
-    @GET
-    @Path("/all")
     public Response getAllQuotes() {
 
         List<Quote> results = CouchConnector.getInstance().getAllItems();
         Gson gson = new Gson();
-
-      /*  String output = "";
-        for (int i=0; i < results.size(); i++) {
-            output = output + gson.toJson(results.get(i));
-        }*/
-        //String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
         String output = gson.toJson(results);
 
-        System.out.println("QuoteSerivce, allquotes: " + output);
+        System.out.println("_____REACHED QUOTE SERVICE________GET ALL");
 
         return Response.status(200).entity(output).build();
-        // String output = gson.toJson(new Quote("NAME", "QUOTE"));
-
     }
 
     /**
-     * Returns employee Details.
+     * Returns an array of all quotes that have been stored in the database.
      */
-    @GET
-    @Path("/{param}")
-    public Response getQuoteByName(@PathParam("param") String quoteID) {
+    @POST
+    @Path("{name}/{quote}")
+    public Response postQuote(@PathParam("name") String name, @PathParam("quote") String quote) {
+
         Gson gson = new Gson();
-        //String output = gson.toJson(new Employee(101, "Antony", "Wayne"));
 
-        String output = gson.toJson(new Quote());
+        Quote quoteEntry = new Quote();
+        quoteEntry.setName(name);
+        quoteEntry.setQuote(quote);
 
-        System.out.println("_____REACHED qUOTE SERVICE");
+        boolean added = CouchConnector.getInstance().addQuoteSynch(quoteEntry);
 
+        String output = "";
+        if (added) {
+            output = "[{\"message\": \"Quote successfully saved in the database.\"}]";
+        }
+        else {
+            output = "[{\"message\": \"Quote was not saved in the database.\"}]";
+        }
         return Response.status(200).entity(output).build();
     }
-
 }

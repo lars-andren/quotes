@@ -8,6 +8,7 @@ import com.couchbase.client.java.CouchbaseCluster;
 import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.error.DocumentAlreadyExistsException;
+import com.couchbase.client.java.view.Stale;
 import com.couchbase.client.java.view.ViewQuery;
 import com.couchbase.client.java.view.ViewResult;
 import com.couchbase.client.java.view.ViewRow;
@@ -40,8 +41,8 @@ public class CouchConnector {
     static Bucket bucket = cluster.openBucket();
 
     /**
-     * Simple synchronous addition of an entry to the database. If there is an entry with tha same name (i.e. ID),
-     * this entry will be updated with the quote given as parameter.
+     * Simple synchronous addition of an entry to the database. If there is an entry with the same name (i.e. ID),
+     * this entry will be updated with the new quote given in the <code>Quote</code> parameter.
      *
      * @param quote what the person said.
      *
@@ -60,7 +61,10 @@ public class CouchConnector {
             }
         }
         else {
-            loaded.content().put(quote.getName(), quote.getQuote());
+            JsonObject obj = loaded.content();
+            obj.put("name", quote.getName());
+            obj.put("quote", quote.getQuote());
+
             bucket.replace(loaded);
         }
 
@@ -68,8 +72,12 @@ public class CouchConnector {
     }
 
     /**
+     * Retrieves all the entries from the view "name_and_quote".
      *
-     * @return
+     * NOTE: The query is done with <code>stale=false</code> which will update the view before the query is performed.
+     * This will decrease performance.
+     *
+     * @return all name+quote pairs in the DB.
      */
     public List<Quote> getAllItems() {
 
@@ -77,7 +85,7 @@ public class CouchConnector {
 
         ViewResult result = bucket.query(
                 ViewQuery
-                        .from("nameAndQuote", "name_and_quote")
+                        .from("nameAndQuote", "name_and_quote").stale(Stale.FALSE)
         );
 
         for(ViewRow row : result.allRows()){
@@ -88,7 +96,6 @@ public class CouchConnector {
         }
 
         return allQuotes;
-
     }
 
     /**

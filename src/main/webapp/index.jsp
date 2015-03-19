@@ -10,7 +10,7 @@
         <script src="lib/angular-resource.js"></script>
         <script src="js/controller.js"></script>
 
-        <title>Quotes - An Angular Application</title>
+        <title>Quotes - Small AngularJS App</title>
 
         <style>
             body {
@@ -18,32 +18,25 @@
             }
         </style>
     </head>
-    <body ng-controller="EmployeeController">
+    <body ng-controller="QuoteController">
         <fieldset>
-            <legend><strong>Employee Information</strong></legend>
-            <h3>Fetch GET request : {{employee.firstName}} {{employee.lastName}}</h3><input type="button" ng-click="fetchGet();" value="Get"/>
-            <h3>Post Response {{postresponse}} </h3> 
-            <input type="button" ng-click="postData();" value="Post"/>
-        </fieldset>  
-        <fieldset>
-            <legend><strong>RESTful Service</strong></legend>
-            <h3>Fetch Employee Details: {{employeeDetails.id}} , {{employeeDetails.firstName}} {{employeeDetails.lastName}}</h3>
+            <legend><strong>Quote - RESTful Service</strong></legend>
+            <h2>Add new quote</h2>
+            <form ng-submit="newQuote()">
+                <p><label>Name:</label><input type="text" ng-model="name"></p>
+                <p><label>Quote:</label><input type="text" ng-model="quote"></p>
+            </form>
+            <h3>{{name + said}} "{{quote}}"</h3>
+
+            <p><input type="button" ng-click="restPost()" value="Add new quote"/></p>
+
             <h2>Quotes:</h2>
             <ul ng-repeat="quote in quotes">
                 <li>{{quote.name + said}} "{{quote.quote}}"</li>
             </ul>
 
-            <input type="button" ng-click="restGet()" value="Fetch Rest call"/>
-            <h3>Fetch Reportee Details:</h3>
-            <ul ng-repeat="reportee in reportees">
-                <li>{{reportee.firstName}} {{reportee.lastName}}</li>
-            </ul>
-            <input type="button" ng-click="restQuery()" value="Fetch using REST Query"/>
-            <h3>Invoking Custom Method</h3>
-            <ul ng-repeat="contactNum in contactNumbers">
-                <li>{{contactNum.number}}</li>
-            </ul>
-            <input type="button" ng-click="contactNumbers()" value="Fetch using REST Query"/>
+            <input type="button" ng-click="restGet()" value="See all quotes"/>
+
         </fieldset>
         
     </body>
