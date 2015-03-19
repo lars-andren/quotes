@@ -21,8 +21,6 @@ public class QuoteService {
         Gson gson = new Gson();
         String output = gson.toJson(results);
 
-        System.out.println("_____REACHED QUOTE SERVICE________GET ALL");
-
         return Response.status(200).entity(output).build();
     }
 
