@@ -14,6 +14,9 @@ import com.google.gson.Gson;
 @Path("/quote")
 public class QuoteService {
 
+    /**
+     * Returns an array of all quotes that have been stored in the database.
+     */
     @GET
     public Response getAllQuotes() {
 
@@ -25,7 +28,11 @@ public class QuoteService {
     }
 
     /**
-     * Returns an array of all quotes that have been stored in the database.
+     * POST calls end up here, new quote is created of the parameters name and quote.
+     *
+     * @param name  a person.
+     * @param quote a quote from that person.
+     * @return  a <code>Response</code> with a message on how the adding went.
      */
     @POST
     @Path("{name}/{quote}")

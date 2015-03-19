@@ -20,7 +20,8 @@ import java.util.NoSuchElementException;
 
 /**
  * Handles the insertions and reads from the Couchbase DB.
- * Use <code>getInstance()</code> for access.
+ *
+ * Uses singleton <code>getInstance()</code> for access.
  */
 public class CouchConnector {
 
@@ -31,7 +32,7 @@ public class CouchConnector {
 
     /**
      *
-     * @return
+     * @return the single available instance.
      */
     public static CouchConnector getInstance() {
         return couchConnector;
@@ -99,9 +100,10 @@ public class CouchConnector {
     }
 
     /**
+     * Method for retrieving a specific quote (the id is the name).
      *
-     * @param id
-     * @return
+     * @param id    the name of the person who said the quote.
+     * @return  the <code>{name, quote}</code> that matches id = name.
      */
     private JsonDocument getItem(String id) {
 
@@ -109,8 +111,6 @@ public class CouchConnector {
         try {
             response = bucket.get(id);
         } catch (NoSuchElementException e) {
-            System.out.println("ERROR: No element with message: "
-                    + e.getMessage());
             e.printStackTrace();
         }
         return response;
