@@ -21,14 +21,14 @@
     <body ng-controller="QuoteController">
         <fieldset>
             <legend><strong>Quote - RESTful Service</strong></legend>
-            <h2>Add new quote</h2>
+            <h2>Add a new quote, or replace an existing one.</h2>
             <form ng-submit="newQuote()">
                 <p><label>Name:</label><input type="text" ng-model="name"></p>
                 <p><label>Quote:</label><input type="text" ng-model="quote"></p>
             </form>
             <h3>{{name + said}} "{{quote}}"</h3>
 
-            <p><input type="button" ng-click="restPost()" value="Add new quote"/></p>
+            <p><input type="button" ng-click="restPost()" value="Add/Replace"/></p>
 
             <h2>Quotes:</h2>
             <ul ng-repeat="quote in quotes">
