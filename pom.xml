@@ -5,7 +5,7 @@
     <groupId>com.mycompany</groupId>
     <artifactId>angular</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.9</version>
 
     <name>angular</name>
     <url>http://maven.apache.org</url>
