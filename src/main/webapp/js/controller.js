@@ -18,13 +18,8 @@ angularModule.factory("QuotePostService", ['$resource', function($resource) {
 
 
 /**
- * 
- * Creating controller and injecting $http, EmployeeListService, EmployeeReporteeService
- * 
- * @param {type} param1
- * @param {type} param2
  */
-angularModule.controller("QuoteController", function($scope, $http, QuoteListService, QuotePostService) {
+angularModule.controller("QuoteController", function($scope, QuoteListService, QuotePostService) {
 
     $scope.quotes = [];
     $scope.said = " once said ";
