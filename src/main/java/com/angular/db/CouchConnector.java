@@ -38,8 +38,14 @@ public class CouchConnector {
         return couchConnector;
     }
 
+    /* Used for Amazon EC2 deployment tests*/
+    static Cluster cluster = CouchbaseCluster.create("52.16.203.26");
+    static Bucket bucket = cluster.openBucket("nameQuoteBucket");
+
+    /* Default Cluster and Bucket, used for localhost test.
     static Cluster cluster = CouchbaseCluster.create();
     static Bucket bucket = cluster.openBucket();
+    */
 
     /**
      * Simple synchronous addition of an entry to the database. If there is an entry with the same name (i.e. ID),
