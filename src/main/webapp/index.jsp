@@ -32,8 +32,9 @@
 
             <h2>Quotes:</h2>
             <ul ng-repeat="quote in quotes">
-                <li>{{quote.name + said}} "{{quote.quote}}"</li>
+                <li>{{quote.name + said}} "{{quote.quote}}" <input type="button" ng-click="restDelete(quote.name)" value="Delete"></li>
             </ul>
+            <p>{{deletehappened}}</p>
 
             <input type="button" ng-click="restGet()" value="See all quotes"/>
 

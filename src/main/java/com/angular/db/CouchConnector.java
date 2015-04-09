@@ -39,13 +39,13 @@ public class CouchConnector {
     }
 
     /* Used for Amazon EC2 deployment tests*/
-    static Cluster cluster = CouchbaseCluster.create("52.16.203.26");
-    static Bucket bucket = cluster.openBucket("nameQuoteBucket");
+    //static Cluster cluster = CouchbaseCluster.create("52.16.203.26");
+    //static Bucket bucket = cluster.openBucket("nameQuoteBucket");
 
-    /* Default Cluster and Bucket, used for localhost test.
+    /* Default Cluster and Bucket, used for localhost test. */
     static Cluster cluster = CouchbaseCluster.create();
     static Bucket bucket = cluster.openBucket();
-    */
+
 
     /**
      * Simple synchronous addition of an entry to the database. If there is an entry with the same name (i.e. ID),
@@ -103,6 +103,21 @@ public class CouchConnector {
         }
 
         return allQuotes;
+    }
+
+    /**
+     * Removes the item (document) with the specific id passed in as parameter.
+     *
+     * @param id    item to delete.
+     * @return  <code>true</code> if the item was deleted. <code>false</code> otherwise.
+     */
+    public boolean deleteItem(String id) {
+        if(id == null || id == "")
+            throw new IllegalArgumentException("Illegal ID to delete");
+
+        JsonDocument removed = bucket.remove(id);
+
+        return (removed != null);
     }
 
     /**

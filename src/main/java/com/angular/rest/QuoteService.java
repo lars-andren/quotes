@@ -55,4 +55,23 @@ public class QuoteService {
         }
         return Response.status(200).entity(output).build();
     }
+
+    @DELETE
+    @Path("{name}")
+    public Response deleteQuote(@PathParam("name") String name) {
+
+        Gson gson = new Gson();
+
+        boolean deleted = CouchConnector.getInstance().deleteItem(name);
+
+        String output = "";
+        if (deleted) {
+            output = "[{\"message\": \"Quote was successfully deleted from the database.\"}]";
+        }
+        else {
+            output = "[{\"message\": \"Quote was not deleted from the database.\"}]";
+        }
+
+        return Response.status(200).entity(output).build();
+    }
 }

@@ -2,6 +2,7 @@
   <artifact type="exploded-war" name="quotes:war exploded">
     <output-path>$PROJECT_DIR$/target/quotes-0.9</output-path>
     <root id="root">
+      <element id="javaee-facet-resources" facet="quotes/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="quotes" />
@@ -16,10 +17,6 @@
           <element id="library" level="project" name="Maven: io.reactivex:rxjava:1.0.4" />
         </element>
       </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/MANIFEST.MF" />
-      </element>
-      <element id="javaee-facet-resources" facet="quotes/web/Web" />
     </root>
   </artifact>
 </component>
