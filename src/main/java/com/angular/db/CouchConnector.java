@@ -4,7 +4,6 @@ import com.angular.domain.Quote;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.CouchbaseCluster;
-
 import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.error.DocumentAlreadyExistsException;
@@ -25,15 +24,8 @@ import java.util.NoSuchElementException;
  */
 public class CouchConnector {
 
-    /**
-     * Instance.
-     */
     private static final CouchConnector couchConnector = new CouchConnector();
 
-    /**
-     *
-     * @return the single available instance.
-     */
     public static CouchConnector getInstance() {
         return couchConnector;
     }
@@ -105,12 +97,6 @@ public class CouchConnector {
         return allQuotes;
     }
 
-    /**
-     * Removes the item (document) with the specific id passed in as parameter.
-     *
-     * @param id    item to delete.
-     * @return  <code>true</code> if the item was deleted. <code>false</code> otherwise.
-     */
     public boolean deleteItem(String id) {
         if(id == null || id == "")
             throw new IllegalArgumentException("Illegal ID to delete");
@@ -120,12 +106,6 @@ public class CouchConnector {
         return (removed != null);
     }
 
-    /**
-     * Method for retrieving a specific quote (the id is the name).
-     *
-     * @param id    the name of the person who said the quote.
-     * @return  the <code>{name, quote}</code> that matches id = name.
-     */
     private JsonDocument getItem(String id) {
 
         JsonDocument response = null;
@@ -137,12 +117,6 @@ public class CouchConnector {
         return response;
     }
 
-    /**
-     * Helper method that creates a JsonDocument containing a JsonObject with a "name" and "quote".
-     *
-     * @param quote what the person said.
-     * @return  a JsonDocument with the <code>name</code> as ID.
-     */
     private JsonDocument createJsonDocument(Quote quote) {
 
         JsonObject jsonQuote = JsonObject.empty()

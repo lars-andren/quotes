@@ -11,15 +11,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Quote {
 
-    /**
-     * A name of a person, and what that person said.
-     */
     private String quote;
+
     private String name;
 
-    /**
-     * The empty constructor needed for Jersey servlet "XmlRootElement"-returns
-     */
     public Quote() {}
 
     public String getName() {
