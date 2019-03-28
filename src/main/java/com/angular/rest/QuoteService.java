@@ -28,15 +28,13 @@ public class QuoteService {
     @Path("{name}/{quote}")
     public Response postQuote(@PathParam("name") String name, @PathParam("quote") String quote) {
 
-        Gson gson = new Gson();
-
         Quote quoteEntry = new Quote();
         quoteEntry.setName(name);
         quoteEntry.setQuote(quote);
 
         boolean added = CouchConnector.getInstance().addQuoteSynch(quoteEntry);
 
-        String output = "";
+        String output;
         if (added) {
             output = "[{\"message\": \"Quote successfully saved in the database.\"}]";
         }
@@ -50,11 +48,9 @@ public class QuoteService {
     @Path("{name}")
     public Response deleteQuote(@PathParam("name") String name) {
 
-        Gson gson = new Gson();
-
         boolean deleted = CouchConnector.getInstance().deleteItem(name);
 
-        String output = "";
+        String output;
         if (deleted) {
             output = "[{\"message\": \"Quote was successfully deleted from the database.\"}]";
         }
